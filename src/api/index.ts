@@ -1,4 +1,4 @@
-import axios from "./axiosInit"
+import axios from "@/api/axiosInit"
 
 export const Login = (qs:PostQs)=>{
     //返回的是promise对象
