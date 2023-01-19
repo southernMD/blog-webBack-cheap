@@ -36,7 +36,7 @@ export const Login = (qs:PostQs)=>{
             ...qs
         }
     })
-    result.then((data)=>{
+    result.then((data :any)=>{
         console.log(data,'zaizheli');
         if(data.status == 200){
             console.log('设置');
