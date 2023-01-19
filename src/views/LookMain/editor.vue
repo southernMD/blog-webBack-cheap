@@ -2,10 +2,10 @@
     <div>
         <md-editor v-model="text" :theme="theme" class="editor" 
         :toolbars-exclude="excludeArr"
-        @onUploadImg="handleUploadImage"
              />
         <div class="others">
             <el-input v-model="title" :rows="2" type="textarea" placeholder="输入文章标题" maxlength="15" resize="none" />
+            <el-input v-model="title2" :rows="2" type="textarea" placeholder="输入文章副标题" maxlength="225" resize="none" />
             <div class="btns">
                 <el-button type="success" @click="next">下一步</el-button>
             </div>
@@ -62,32 +62,6 @@ const removeTog = () => {
     }
 }
 
-const handleUploadImage = async(files:any[],callback:any)=>{
-    console.log(files);
-    const res = await Promise.all(
-        files.map((file)=>{
-            return new Promise<BaseRes>((resolve, reject) => {
-                const form = new FormData();
-                form.append('file', file);
-                My.reqPostImageToGithub(form).then((data)=>{
-                    resolve(data)
-                }).catch((error)=>{
-                    reject(error)
-                })
-            })
-        })
-    )
-    let hs_res_http = await My.reqPushImageToGithub()
-    if(hs_res_http.status == 200){
-        const urls:string[] = (hs_res_http as GitHubIMG).urls
-        callback(urls)
-    }else{
-        ElMessage({
-            type:'error',
-            message:'上传出错'
-        })
-    }
-}
 
 let domWidth = toRef(Login, 'windowWidth')
 
@@ -111,12 +85,14 @@ watch(th, () => {
 
 let text = toRef(My.writing,'text')
 let title = toRef(My.writing,'title')
+let title2 = toRef(My.writing,'title2')
 
 const next = () => {
     console.log(text.value);
     console.log(title.value);
     $router.push({
         name: 'editor2',
+        query:$route.query
     })
 }
 
@@ -156,6 +132,7 @@ onActivated(()=>{
     :deep(.el-textarea) {
         width: 25%;
         min-width: 200px;
+        margin-right: 15px;
     }
 
     .btns {

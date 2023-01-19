@@ -59,9 +59,9 @@
                 <el-button type="success" @click="prev">上一步</el-button>
             </div>
             <div class="right">
-                <el-button type="danger" @click="DelText" v-if="saveIndex != -1">删除</el-button>
+                <el-button type="danger" @click="DelText" v-if="saveIndex != -1 || $route.query.h">删除</el-button>
                 <el-button type="primary" @click="throttleSaveText">保存</el-button>
-                <el-button type="success" @click="throttlePost">提交</el-button>
+                <el-button type="success" @click="throttlePost" v-if="!$route.query.h">提交</el-button>
             </div>
         </div>
     </div>
@@ -210,14 +210,13 @@ const removeTags = (tag: string) => {
 }
 
 
-let Url = ref('https://raw.githubusercontent.com/southernMD/images/main/img/SoxZwcrw.jpeg')
+let Url = toRef(My.writing, 'imgUrl')
 const saveIndex = toRef(My, 'saveIndex')
 watch(saveIndex, () => {
     if (saveIndex.value != -1) {
         Url.value = writing.value.imgUrl
     }
 }, { immediate: true })
-let EndFlie = toRef(My, 'EndFlie')
 
 let dateValue: Ref<Date | undefined> = ref()   //时间
 let WrTime = toRef(My.writing, 'time')
@@ -273,13 +272,14 @@ const postA = async (obj: ArticleObj, ms: string) => {
     const result: PostArticle | ErrorVar = await My.reqPostArticle(obj)
     console.log(result);
     if ((result as PostArticle).status == 200) {
-        writing.value.id = (result as PostArticle).id
         if (ms == '保存') {
+            writing.value.id = (result as PostArticle).id
             saveIndex.value = My.draftArr.length
         }
         ElMessage({
             message: `${ms}成功`,
             type: 'success',
+            duration: 1000
         })
         My.reqDraft()
         if (ms == '删除') {
@@ -303,14 +303,18 @@ const postA = async (obj: ArticleObj, ms: string) => {
 const saveText = async () => {
     writing.value.state = '保存'
     writing.value.imgUrl = Url.value
+    if (writing.value.imgUrl.length == 0) {
+        writing.value.imgUrl = 'https://raw.githubusercontent.com/southernMD/images/main/img/SoxZwcrw.jpeg'
+    }
     let obj: ArticleObj = {
         title: writing.value.title || '[save]',
+        title2: writing.value.title2,
         time: writing.value.time,
         text: writing.value.text || '[save]',
         gather: writing.value.gather || '[save]',
         tags: writing.value.tags || '[save]',
         state: writing.value.state,
-        imgUrl: writing.value.imgUrl || 'https://raw.githubusercontent.com/southernMD/images/main/img/SoxZwcrw.jpeg',
+        imgUrl: writing.value.imgUrl,
         ifpublic: writing.value.ifpublic,
         id: writing.value.id
     }
@@ -324,6 +328,7 @@ const throttleSaveText = throttle(saveText, 2000, { trailing: true })
 const prev = () => {
     $router.push({
         name: 'editor',
+        query:$route.query
     })
 }
 
@@ -336,12 +341,13 @@ const post = async () => {
     writing.value.state = '发布'
     let obj: ArticleObj = {
         title: writing.value.title,
+        title2: writing.value.title2,
         time: writing.value.time,
         text: writing.value.text,
         gather: writing.value.gather,
         tags: writing.value.tags,
         state: writing.value.state,
-        imgUrl: writing.value.imgUrl,
+        imgUrl: writing.value.imgUrl || 'https://raw.githubusercontent.com/southernMD/images/main/img/SoxZwcrw.jpeg',
         ifpublic: writing.value.ifpublic,
         id: writing.value.id
     }
@@ -377,6 +383,7 @@ const post = async () => {
     }
     if (flag) {
         postA(obj, '发布');
+        My.clearWriting()
     }
 
 }
@@ -402,6 +409,7 @@ const DelText = () => {
             tags: writing.value.tags || '[save]',
             state: writing.value.state + ',删除' as stateName,
             imgUrl: writing.value.imgUrl || 'https://raw.githubusercontent.com/southernMD/images/main/img/SoxZwcrw.jpeg',
+            title2: writing.value.title2,
             ifpublic: writing.value.ifpublic,
             id: writing.value.id,
             delTime: new Date().toLocaleString(),
@@ -550,6 +558,6 @@ const DelText = () => {
         margin-bottom: 50px;
         margin-top: 20px;
     }
-    
+
 }
 </style>

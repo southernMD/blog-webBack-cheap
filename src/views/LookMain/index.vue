@@ -259,6 +259,7 @@ const saveText = async () => {
 
   let obj: ArticleObj = {
     title: writing.value.title || '[save]',
+    title2: writing.value.title2 || '[save]',
     time: writing.value.time,
     text: writing.value.text || '[save]',
     gather: writing.value.gather || '[save]',
@@ -271,23 +272,7 @@ const saveText = async () => {
   console.log(obj);
   postA(obj, '保存')
 }
-let EndFlie = toRef(My, 'EndFlie')
 const postA = async (obj: ArticleObj, ms: string) => {
-  if (EndFlie.value[0]) {
-    let formData = new FormData();
-    formData.append('file', EndFlie.value[0].raw)
-    //提交图片拿到名字 obj.fileName = 143.jpg
-    let result: ImgUpload = await My.reqPostImg(formData)
-    if (result.status == 200) {
-      obj.imgUrl = result.filename
-      writing.value.imgUrl = result.filename
-    } else {
-      ElMessage({
-        message: '图片提交失败',
-        type: 'error',
-      })
-    }
-  }
   //axios提交
   const result: PostArticle | ErrorVar = await My.reqPostArticle(obj)
   console.log(result);

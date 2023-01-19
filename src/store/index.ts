@@ -34,6 +34,7 @@ export const useMy = defineStore('My', {
             lookingArr:[],
             writing:{
                 title: '', 
+                title2:'',
                 time: '',
                 text: '',
                 gather: '',
@@ -132,6 +133,7 @@ export const useMy = defineStore('My', {
         clearWriting(){
             this.writing = {
                 title: '', 
+                title2:'',
                 time: '',
                 text: '',
                 gather: '',

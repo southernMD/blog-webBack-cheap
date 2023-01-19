@@ -54,6 +54,7 @@ type stateName =  '保存' | '发布' | '保存,删除'  | '发布,删除' | ''
 
 type ArticleObj = {
   title: string ;
+  title2:string;
   time: string;
   text: string;
   gather: any;

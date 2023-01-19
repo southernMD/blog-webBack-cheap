@@ -141,27 +141,7 @@ const changeIcon = (id:number,flag:boolean)=>{
 
 let PHWidth = toRef(Login, 'windowWidth')
 // let tableData = toRef(My, 'trashArr')
-const tableData = [
-    { title: 1, text: 'dasdad', restOfTime: 0 },
-    { title: 1, text: 'dasdad', restOfTime: 0 },
-    { title: 1, text: 'dasdad', restOfTime: 0 },
-    { title: 1, text: 'dasdad', restOfTime: 0 },
-    { title: 1, text: 'dasdad', restOfTime: 0 },
-    { title: 1, text: 'dasdad', restOfTime: 0 },
-    { title: 1, text: 'dasdad', restOfTime: 0 },
-    { title: 1, text: 'dasdad', restOfTime: 0 },
-    { title: 1, text: 'dasdad', restOfTime: 0 },
-    { title: 1, text: 'dasdad', restOfTime: 0 },
-    { title: 1, text: 'dasdad', restOfTime: 0 },
-    { title: 1, text: 'dasdad', restOfTime: 0 },
-    { title: 1, text: 'dasdad', restOfTime: 0 },
-    { title: 1, text: 'dasdad', restOfTime: 0 },
-    { title: 1, text: 'dasdad', restOfTime: 0 },
-    { title: 1, text: 'dasdad', restOfTime: 0 },
-    { title: 1, text: 'dasdad', restOfTime: 0 },
-    { title: 1, text: 'dasdad', restOfTime: 0 },
-    { title: 1, text: 'dasdad', restOfTime: 0 },
-]
+
 const handleChange = (val: string[]) => {
     console.log(val)
 }
@@ -182,7 +162,10 @@ const Editor = (key:string,id:number) => {
         }
     }
     $router.push({
-        name:'editor'
+        name:'editor',
+        query:{
+            h:1
+        }
     })
 }
 
