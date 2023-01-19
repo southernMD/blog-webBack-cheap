@@ -62,19 +62,20 @@ const router = createRouter({
 
 router.beforeEach(async(to,from,next)=>{
     NProgress.start()
-    let result:LoginState = (await LoginState()) 
-    console.log(result.status);
+    console.log(to.fullPath,from.fullPath);
     if(to.fullPath.includes('my')){
-        if(result.status == 203){
-            next('/login')
-        }else{
+        try {
+            let result:LoginState = (await LoginState()) 
             next()
+        } catch (error) {
+            next('/login')
         }
     }else if(to.fullPath.includes('login')){
-        if(result.status == 203){
-            next()
-        }else{
+        try {
+            let result:LoginState = (await LoginState()) 
             next('/my')
+        } catch (error) {
+            next()
         }
     }
 })

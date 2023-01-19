@@ -24,6 +24,7 @@ type PostQs = {
 type LoginState = {
   status:number
   message?:string[]
+  token?:string
 }
 
 type UseLogin = {

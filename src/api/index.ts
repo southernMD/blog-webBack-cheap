@@ -1,13 +1,15 @@
 import request from "axios";
 
 const axios = request.create({
-    baseURL:`https://www.southernapi.top`,
+    baseURL:'https://www.southernapi.top',
+    // baseURL:`http://${window.location.hostname}:3102`,
     withCredentials:true
 }) 
 
 //请求拦截器，在发起请求前做一些事情
 axios.interceptors.request.use((config)=>{
     //包含请求头headers
+    config.headers = {Authorization:'Bearer '+ window.localStorage.getItem('token')}
     return config;
 })
 
@@ -27,13 +29,22 @@ axios.interceptors.response.use((response) =>{
 
 export const Login = (qs:PostQs)=>{
     //返回的是promise对象
-    return axios({
+    const result = axios({
         url:`/login`,
         method:'POST',
         data:{
             ...qs
         }
     })
+    result.then((data)=>{
+        console.log(data,'zaizheli');
+        if(data.status == 200){
+            console.log('设置');
+            window.localStorage.setItem('token',data.token)
+            // axios.defaults.headers['Authorization'] = 'Bearer '+ data.token
+        }
+    })
+    return result
 }
 
 export const LoginState = ()=>{
