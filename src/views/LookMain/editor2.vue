@@ -301,7 +301,7 @@ const postA = async (obj: ArticleObj, ms: string) => {
 }
 
 const saveText = async () => {
-    writing.value.state = '保存'
+    if(writing.value.state != '发布')writing.value.state = '保存'
     writing.value.imgUrl = Url.value
     if (writing.value.imgUrl.length == 0) {
         writing.value.imgUrl = 'https://raw.githubusercontent.com/southernMD/images/main/img/SoxZwcrw.jpeg'
