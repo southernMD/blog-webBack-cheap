@@ -304,7 +304,7 @@ const saveText = async () => {
     if(writing.value.state != '发布')writing.value.state = '保存'
     writing.value.imgUrl = Url.value
     if (writing.value.imgUrl.length == 0) {
-        writing.value.imgUrl = 'https://raw.githubusercontent.com/southernMD/images/main/img/SoxZwcrw.jpeg'
+        writing.value.imgUrl = 'https://cdn.jsdelivr.net/gh/southernMD/images@main/img/SoxZwcrw.jpeg'
     }
     let obj: ArticleObj = {
         title: writing.value.title || '[save]',
@@ -347,7 +347,7 @@ const post = async () => {
         gather: writing.value.gather,
         tags: writing.value.tags,
         state: writing.value.state,
-        imgUrl: writing.value.imgUrl || 'https://raw.githubusercontent.com/southernMD/images/main/img/SoxZwcrw.jpeg',
+        imgUrl: writing.value.imgUrl || 'https://cdn.jsdelivr.net/gh/southernMD/images@main/img/SoxZwcrw.jpeg',
         ifpublic: writing.value.ifpublic,
         id: writing.value.id
     }
@@ -408,7 +408,7 @@ const DelText = () => {
             gather: writing.value.gather || '[save]',
             tags: writing.value.tags || '[save]',
             state: writing.value.state + ',删除' as stateName,
-            imgUrl: writing.value.imgUrl || 'https://raw.githubusercontent.com/southernMD/images/main/img/SoxZwcrw.jpeg',
+            imgUrl: writing.value.imgUrl || 'https://cdn.jsdelivr.net/gh/southernMD/images@main/img/SoxZwcrw.jpeg',
             title2: writing.value.title2,
             ifpublic: writing.value.ifpublic,
             id: writing.value.id,
