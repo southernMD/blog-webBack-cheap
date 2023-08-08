@@ -20,6 +20,7 @@
 <script setup lang="ts">
 import {ref} from 'vue'
 import {getabout,postabout} from '@/api'
+import { ElMessage } from 'element-plus'
 const textarea = ref('')
 const message = await getabout()
 //@ts-ignore
