@@ -1,8 +1,8 @@
 import request from "axios";
 
 const axios = request.create({
-    baseURL:'https://www.southernapi.top',
-    // baseURL:`http://${window.location.hostname}:3102`,
+    // baseURL:'https://www.southernapi.top',
+    baseURL:`http://${window.location.hostname}:3102`,
     withCredentials:true
 }) 
 
@@ -143,8 +143,6 @@ export const delShort = (ids:string)=>{
     })
 }
 
-
-
 export const my = ()=>{
     //返回的是promise对象
     return axios({
@@ -153,3 +151,19 @@ export const my = ()=>{
     })
 }
 
+export const getabout = ()=>{
+    return axios({
+        url:`/show/about`,
+        method:'GET'
+    })
+}
+
+export const postabout = (ms:string)=>{
+    return axios({
+        url:`/show/about`,
+        method:'POST',
+        data:{
+            message:ms
+        }
+    })
+}

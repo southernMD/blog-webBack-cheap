@@ -14,6 +14,7 @@
               <el-menu-item index="1-1" @click="go('1-1')">发文</el-menu-item>
               <el-menu-item index="1-2" @click="go('1-2')">浏览</el-menu-item>
               <el-menu-item index="1-3" @click="go('1-3')">垃圾桶</el-menu-item>
+              <el-menu-item index="1-4" @click="go('1-4')">关于</el-menu-item>
             </el-sub-menu>
             <el-sub-menu index="2">
               <template #title>
@@ -44,46 +45,46 @@
       <div class="modle" @click.self="close" :class="{ 'modle-more': draftOpenFlag && domWidth <= 500 }"
         v-show="(showLeftFlag || draftOpenFlag) && domWidth <= 500"></div>
       <el-main>
-        <el-header>
-          <i class="iconfont icon-caidan" @click="showLeft" v-show="domWidth <= 500"></i>
-          <i class="iconfont icon-jiahao_o" :class="{
-            'add-pc': domWidth > 500,
-            'add-phone': domWidth <= 500
-          }" v-show="String($route.name).includes('editor')" @click="newPage"></i>
-          <div :class="{
-            'draft-pc': domWidth > 500,
-            'draft-phone': domWidth <= 500
-          }">
-            <span @click="openDraft">草稿箱</span>
-          </div>
-          <el-switch v-model="switchFlag" class="mb-2" @click="toggleDark()" style="--el-switch-on-color: #73767a;" />
-          <div class="menu" v-show="draftOpenFlag && domWidth <= 500">
-            <el-scrollbar>
-              <el-menu index="1">
-                <el-menu-item :index="`1-${index + 1}`" v-for="(val, index) in draftArr" style='
-                  display: flex;
-                  justify-content: space-between;
-                ' @click="reLoadDraft(index)" :data-id="val" :key="val">
+        <el-scrollbar>
+          <el-header>
+            <i class="iconfont icon-caidan" @click="showLeft" v-show="domWidth <= 500"></i>
+            <i class="iconfont icon-jiahao_o" :class="{
+              'add-pc': domWidth > 500,
+              'add-phone': domWidth <= 500
+            }" v-show="String($route.name).includes('editor')" @click="newPage"></i>
+            <div :class="{
+              'draft-pc': domWidth > 500,
+              'draft-phone': domWidth <= 500
+            }">
+              <span @click="openDraft">草稿箱</span>
+            </div>
+            <el-switch v-model="switchFlag" class="mb-2" @click="toggleDark()" style="--el-switch-on-color: #73767a;" />
+            <div class="menu" v-show="draftOpenFlag && domWidth <= 500">
+              <el-scrollbar>
+                <el-menu index="1">
+                  <el-menu-item :index="`1-${index + 1}`" v-for="(val, index) in draftArr" style='
+                    display: flex;
+                    justify-content: space-between;
+                  ' @click="reLoadDraft(index)" :data-id="val" :key="val">
+                    <div>{{ val.title }}</div>
+                    <div>{{ val.time }}</div>
+                  </el-menu-item>
+                </el-menu>
+              </el-scrollbar>
+            </div>
+            <el-drawer v-if="domWidth > 500" v-model="draftOpenFlag" title="I am the title" :with-header="false"
+              :append-to-body="true">
+              <el-menu index="1" style="border:none">
+                <el-menu-item :index="`1-${index + 1}`" v-for="(val, index) in draftArr" style="
+                    display: flex;
+                    justify-content: space-between;
+                  " @click="reLoadDraft(index)" :data-id="val" :key="val">
                   <div>{{ val.title }}</div>
                   <div>{{ val.time }}</div>
                 </el-menu-item>
               </el-menu>
-            </el-scrollbar>
-          </div>
-          <el-drawer v-if="domWidth > 500" v-model="draftOpenFlag" title="I am the title" :with-header="false"
-            :append-to-body="true">
-            <el-menu index="1" style="border:none">
-              <el-menu-item :index="`1-${index + 1}`" v-for="(val, index) in draftArr" style="
-                  display: flex;
-                  justify-content: space-between;
-                " @click="reLoadDraft(index)" :data-id="val" :key="val">
-                <div>{{ val.title }}</div>
-                <div>{{ val.time }}</div>
-              </el-menu-item>
-            </el-menu>
-          </el-drawer>
-        </el-header>
-        <el-scrollbar>
+            </el-drawer>
+          </el-header>
           <main>
             <div v-show="$route.name == 'my'">
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id, ea sunt molestiae quia quae itaque natus
@@ -200,6 +201,10 @@ const go = (way: string) => {
   }else if(way === '1-2'){
     $router.push({
       name: 'look'
+    })
+  }else if(way === '1-4'){
+    $router.push({
+      name: 'about'
     })
   }
 }

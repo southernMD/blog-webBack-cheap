@@ -40,6 +40,11 @@ const routes: Array<RouteRecordRaw> = [
                 path:'look',
                 name:'look',
                 component:()=>import('@/views/LookMain/look.vue'),
+            },
+            {
+                path:'about',
+                name:'about',
+                component:()=>import('@/views/LookMain/about.vue'),
             }
         ]
         
