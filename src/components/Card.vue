@@ -67,7 +67,7 @@ const { handlerId, isShallowOver } = toRefs(dropCollect)
 const { isDragging } = toRefs(collect)
 const opacity = computed(() => (unref(isDragging) ? 0 : 1))
 
-const setRef = (el: HTMLDivElement) => {
+const setRef:any = (el: HTMLDivElement) => {
   card.value = drag(drop(el)) as HTMLDivElement
 }
 
