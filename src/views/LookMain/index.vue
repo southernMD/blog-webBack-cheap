@@ -15,6 +15,7 @@
               <el-menu-item index="1-2" @click="go('1-2')">浏览</el-menu-item>
               <el-menu-item index="1-3" @click="go('1-3')">垃圾桶</el-menu-item>
               <el-menu-item index="1-4" @click="go('1-4')">关于</el-menu-item>
+              <el-menu-item index="1-4" @click="go('1-5')">音乐</el-menu-item>
             </el-sub-menu>
             <el-sub-menu index="2">
               <template #title>
@@ -205,6 +206,10 @@ const go = (way: string) => {
   }else if(way === '1-4'){
     $router.push({
       name: 'about'
+    })
+  }else if(way === '1-5'){
+    $router.push({
+      name: 'music'
     })
   }
 }

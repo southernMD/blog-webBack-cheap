@@ -1,8 +1,8 @@
 import request from "axios";
 
 const axios = request.create({
-    baseURL:'https://www.southernapi.top',
-    // baseURL:`http://${window.location.hostname}:3102`,
+    // baseURL:'https://www.southernapi.top',
+    baseURL:`http://${window.location.hostname}:3102`,
     withCredentials:true
 }) 
 
@@ -164,6 +164,44 @@ export const postabout = (ms:string)=>{
         method:'POST',
         data:{
             message:ms
+        }
+    })
+}
+
+export const getMusic = ()=>{
+    return axios({
+        url:`/show/music`,
+        method:'GET',
+    })
+}
+
+export const postMusic = (item:any)=>{
+    item.ifTranslate = item.ifTranslate.toString()
+    item.ifScroll = item.ifScroll.toString()
+    return axios({
+        url:`/my/music`,
+        method:'POST',
+        data:item
+    })
+}
+
+export const delMusic = (id:number)=>{
+    return axios({
+        url:`/my/music`,
+        method:'DELETE',
+        data:{
+            id
+        }
+    })
+}
+
+
+export const orderMusic = (ids:number[])=>{
+    return axios({
+        url:`/my/music-order`,
+        method:'POST',
+        data:{
+            ids
         }
     })
 }

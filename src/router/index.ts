@@ -45,7 +45,12 @@ const routes: Array<RouteRecordRaw> = [
                 path:'about',
                 name:'about',
                 component:()=>import('@/views/LookMain/about.vue'),
-            }
+            },
+            {
+                path:'music',
+                name:'music',
+                component:()=>import('@/views/LookMain/music.vue'),
+            },
         ]
         
     },
