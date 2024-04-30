@@ -1,8 +1,8 @@
 import request from "axios";
 
 const axios = request.create({
-    baseURL:'https://www.southernapi.top',
-    // baseURL:`http://${window.location.hostname}:3102`,
+    // baseURL:'https://www.southernapi.top',
+    baseURL:`http://${window.location.hostname}:3102`,
     withCredentials:true
 }) 
 
@@ -203,5 +203,27 @@ export const orderMusic = (ids:number[])=>{
         data:{
             ids
         }
+    })
+}
+
+export const getArticleShort = ()=>{
+    return axios({
+        url:`/show/article_short`,
+        method:'GET',
+    })
+}
+
+export const changeIfTop = (body:{type:1 | 0,id:number})=>{
+    return axios({
+        url:`/my/change_top`,
+        method:'POST',
+        data:body
+    })
+}
+
+export const getTopArticle = ()=>{
+    return axios({
+        url:`/show/top_article`,
+        method:'GET',
     })
 }

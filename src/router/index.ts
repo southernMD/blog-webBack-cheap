@@ -51,6 +51,11 @@ const routes: Array<RouteRecordRaw> = [
                 name:'music',
                 component:()=>import('@/views/LookMain/music.vue'),
             },
+            {
+                path:'top',
+                name:'top',
+                component:()=>import('@/views/LookMain/top.vue'),
+            },
         ]
         
     },
