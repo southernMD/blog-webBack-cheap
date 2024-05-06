@@ -1,8 +1,8 @@
 import request from "axios";
 
 const axios = request.create({
-    // baseURL:'https://www.southernapi.top',
-    baseURL:`http://${window.location.hostname}:3102`,
+    baseURL:'https://www.southernapi.top',
+    // baseURL:`http://${window.location.hostname}:3102`,
     withCredentials:true
 }) 
 
