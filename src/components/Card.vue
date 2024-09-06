@@ -10,8 +10,10 @@ const props = defineProps<{
   index: number
   ar:string
   order:number
+  hide:number
   moveCard: (dragIndex: number, hoverIndex: number) => void
   deleteSong: (id:number,order:number) => void
+  hideSong: (id:number,order:number) => void
   openSong:(message:any)=>void
 }>()
 
@@ -89,6 +91,7 @@ const openThisSong = ()=>{
       <span class="txt" @click="openThisSong"> {{ name }} </span>
       <span class="ar" @click.stop>{{ ar }}</span>
       <span class="del" @click="deleteSong(id,index)">删除</span>
+      <span class="del p" @click="hideSong(id,index)">{{ hide?'展示':'隐藏'}}</span>
     </div>
     <div v-if="isShallowOver && !isDragging" :class="['indicator', { first: props.index === 0 }]"></div>
   </div>
@@ -145,6 +148,9 @@ const openThisSong = ()=>{
     cursor: pointer;
     width: 5%;
     font-size: 12px;
+  }
+  .p{
+    padding-left: 2px;
   }
 }
 </style>

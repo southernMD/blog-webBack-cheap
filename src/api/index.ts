@@ -1,8 +1,8 @@
 import request from "axios";
 
 const axios = request.create({
-    baseURL:'https://www.southernapi.top',
-    // baseURL:`http://${window.location.hostname}:3102`,
+    // baseURL:'https://www.southernapi.top',
+    baseURL:`http://${window.location.hostname}:3102`,
     withCredentials:true
 }) 
 
@@ -170,7 +170,7 @@ export const postabout = (ms:string)=>{
 
 export const getMusic = ()=>{
     return axios({
-        url:`/show/music`,
+        url:`/my/music`,
         method:'GET',
     })
 }
@@ -225,5 +225,14 @@ export const getTopArticle = ()=>{
     return axios({
         url:`/show/top_article`,
         method:'GET',
+    })
+}
+
+
+export const postChangeHide = (body:{id:number,hide:number})=>{
+    return axios({
+        url:`/my/change_hide`,
+        method:'POST',
+        data:body
     })
 }

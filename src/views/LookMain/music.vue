@@ -6,12 +6,13 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import type { Action } from 'element-plus'
-import { delMusic, getMusic, orderMusic, postMusic } from '@/api'
+import { delMusic, getMusic, orderMusic, postMusic,postChangeHide } from '@/api'
 interface Item {
   id: number
   name: string
   ar:string
   al:string
+  hide:string
   songUrl:string
   coverUrl:string
   ifScroll:boolean
@@ -167,12 +168,6 @@ const rules = reactive({
   al:[
     { required: true, message: '不为空', trigger: 'blur' },
   ],
-  lrc:[
-    { required: true, message: '不为空', trigger: 'blur' },
-  ],
-  translate:[
-    { required: true, message: '不为空', trigger: 'blur' },
-  ],
 })
 
 const deleteSong = (id:number,index:number)=>{
@@ -205,6 +200,23 @@ const deleteSong = (id:number,index:number)=>{
       })
     })
 }
+const hideSong = async(id:number,index:number)=>{
+  console.log( cards.value[index].hide);
+  const willHide = cards.value[index].hide == '0'?'1':'0'
+  try {
+    await postChangeHide({id,hide:+willHide})
+    cards.value[index].hide = willHide
+    ElMessage({
+      message: '更改成功',
+      type: 'success',
+    })
+  } catch (error) {
+    ElMessage({
+      message: '更改失败',
+      type: 'error',
+    })
+  }
+}
 </script>
 
 <template>
@@ -218,8 +230,10 @@ const deleteSong = (id:number,index:number)=>{
             :index="index"
             :order="index"
             :ar="card.ar"
+            :hide="+card.hide"
             :open-song="openSong"
             :delete-song="deleteSong"
+            :hideSong="hideSong"
             :move-card="moveCard" />
           </DndProvider>
         </el-scrollbar>
