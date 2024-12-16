@@ -7,9 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    Box: typeof import('./src/components/box.vue')['default']
     Card: typeof import('./src/components/Card.vue')['default']
-    Darg: typeof import('./src/components/darg.vue')['default']
     DraggableImage: typeof import('./src/components/Home/DraggableImage.vue')['default']
     DropEmptyImage: typeof import('./src/components/Home/DropEmptyImage.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
@@ -30,15 +28,11 @@ declare module '@vue/runtime-core' {
     ElHeader: typeof import('element-plus/es')['ElHeader']
     ElIcon: typeof import('element-plus/es')['ElIcon']
     ElImage: typeof import('element-plus/es')['ElImage']
-    ElImg: typeof import('element-plus/es')['ElImg']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElMain: typeof import('element-plus/es')['ElMain']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
     ElOption: typeof import('element-plus/es')['ElOption']
-    ElPopconfirm: typeof import('element-plus/es')['ElPopconfirm']
-    ElRadio: typeof import('element-plus/es')['ElRadio']
-    ElRadioGroup: typeof import('element-plus/es')['ElRadioGroup']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElSelect: typeof import('element-plus/es')['ElSelect']

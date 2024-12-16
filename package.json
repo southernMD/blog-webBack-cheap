@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "vite --mode development",
     "pro": "vite --mode production",
-    "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "build": "vite build --mode production",
+    "preview": "vite preview",
+    "test":"vue-tsc --noEmit"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
