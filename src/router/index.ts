@@ -22,6 +22,11 @@ const routes: Array<RouteRecordRaw> = [
         component:()=>import('@/views/LookMain/index.vue'),
         children:[
             {
+                path:'home',
+                name:'home',
+                component:()=>import('@/views/LookMain/home.vue'),
+            },
+            {
                 path:'editor',
                 name:'editor',
                 component:()=>import('@/views/LookMain/editor.vue'),
@@ -56,7 +61,8 @@ const routes: Array<RouteRecordRaw> = [
                 name:'top',
                 component:()=>import('@/views/LookMain/top.vue'),
             },
-        ]
+        ],
+
         
     },
     {
@@ -88,7 +94,7 @@ router.beforeEach(async(to,from,next)=>{
     }else if(to.fullPath.includes('login')){
         try {
             let result:LoginState = (await LoginState()) 
-            next('/my')
+            next('/my/home')
         } catch (error) {
             next()
         }

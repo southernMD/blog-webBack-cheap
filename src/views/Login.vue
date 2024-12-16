@@ -40,7 +40,7 @@ const go =async()=>{
    console.log(result);
    if(result.status == 200){
     $router.push({
-        path:'/my'
+        name:'home'
     })
    }else if(result.status == 203){
     result.message?.forEach((value,index)=>{

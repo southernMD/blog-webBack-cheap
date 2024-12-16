@@ -1,8 +1,9 @@
 import request from "axios";
 
 const axios = request.create({
-    baseURL:'https://www.southernapi.top',
+    // baseURL:'https://www.southernapi.top',
     // baseURL:`http://${window.location.hostname}:3102`,
+    baseURL:`http://127.0.0.1:3102`,
     withCredentials:true
 }) 
 
@@ -234,5 +235,74 @@ export const postChangeHide = (body:{id:number,hide:number})=>{
         url:`/my/change_hide`,
         method:'POST',
         data:body
+    })
+}
+
+export const getHeadImg = ()=>{
+    return axios({
+        url:`/my/head_img`,
+        method:'GET',
+    })
+}
+
+export const changeHeadImg = (body:{id?:number,url:string,url_origin:string,_show:0 | 1})=>{
+    return axios({
+        url:`/my/head_img`,
+        method:'POST',
+        data:body
+    })
+}
+
+export const delHeadImg = (id:number)=>{
+    return axios({
+        url:`/my/head_img`,
+        method:'DELETE',
+        data:{
+            id
+        }
+    })
+}
+
+export const getIndexMsg = ()=>{
+    return axios({
+        url:`/my/index_msg`,
+        method:'GET',
+    })
+}
+export const changeIndexMsg = (data:string)=>{
+    return axios({
+        url:`/my/index_msg`,
+        method:'POST',
+        data:{
+            message:data
+        }
+    })
+}
+
+export const getCarousel = ()=>{
+    return axios({
+        url:`/my/carousel`,
+        method:'GET',
+    })
+}
+
+export const changeCarouselList = (body:{id?:number,imgUrl:string,_show:0 | 1}[])=>{
+    return axios({
+        url:`/my/carousel`,
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        data:body
+    })
+}
+
+export const delCarousel = (id:number)=>{
+    return axios({
+        url:`/my/carousel`,
+        method:'DELETE',
+        data:{
+            id
+        }
     })
 }

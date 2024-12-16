@@ -88,11 +88,6 @@
             </el-drawer>
           </el-header>
           <main>
-            <div v-show="$route.name == 'my'">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id, ea sunt molestiae quia quae itaque natus
-              voluptas placeat ratione exercitationem officia. Aperiam earum, nostrum inventore quaerat cupiditate omnis
-              unde animi.
-            </div>
             <Suspense>
               <template #default>
                 <router-view v-slot="{ Component }">
@@ -111,7 +106,6 @@
 
           </main>
         </el-scrollbar>
-
       </el-main>
     </el-container>
   </div>
@@ -123,6 +117,7 @@ import { getCurrentInstance, ref, watch, ComponentInternalInstance, onMounted, o
 import { useRouter, useRoute } from 'vue-router';
 import { useLogin, useMy } from '@/store';
 import { ElAside, ElMessageBox, ElMessage, Action } from 'element-plus'
+import Home from '@/components/Home.vue';
 
 const $el = getCurrentInstance() as ComponentInternalInstance
 const $router = useRouter()
@@ -221,7 +216,7 @@ const go = (way: string) => {
 
 const goIndex = () => {
   $router.push({
-    path: '/my'
+    path: '/my/homee'
   })
 }
 
