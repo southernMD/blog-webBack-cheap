@@ -3,7 +3,7 @@ import request from "axios";
 const axios = request.create({
     baseURL:import.meta.env.VITE_APP_BASE_API,
     // baseURL:`http://${window.location.hostname}:3102`,
-    // baseURL:`http://127.0.0.1:3102`,
+    // baseURL:`https://www.southernapi.top`,
     withCredentials:true
 }) 
 
