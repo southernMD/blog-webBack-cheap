@@ -7,6 +7,7 @@ import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import type { Action } from 'element-plus'
 import { delMusic, getMusic, orderMusic, postMusic,postChangeHide } from '@/api'
+import { useLogin } from '@/store'
 interface Item {
   id: number
   name: string
@@ -217,11 +218,12 @@ const hideSong = async(id:number,index:number)=>{
     })
   }
 }
+const Login = useLogin()
 </script>
 
 <template>
   <div class="music">
-    <div class="main">
+    <div class="main" :class="{'main-phone': Login.windowWidth <= 700 }">
       <div class="drag-able">
         <el-scrollbar>
           <DndProvider :backend="HTML5Backend">
@@ -299,6 +301,7 @@ const hideSong = async(id:number,index:number)=>{
   .main {
     padding: 2%;
     display: flex;
+
     .drag-able {
       width: 50%;
       height: 550px;
@@ -330,6 +333,16 @@ const hideSong = async(id:number,index:number)=>{
           order: 2;
         }
       }
+    }
+
+  }
+  .main-phone{
+    flex-direction: column;
+    .drag-able{
+      width: 100%;
+    }
+    .form{
+      width: 90%;
     }
   }
   .option{
